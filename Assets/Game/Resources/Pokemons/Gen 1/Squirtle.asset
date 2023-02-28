@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79cd382714b1144a8633f1581a27dc9, type: 3}
+  m_Name: Squirtle
+  m_EditorClassIdentifier: 
+  name: Squirtle
+  description: 
+  frontSprite: {fileID: 21300000, guid: 636c8cc42e809dc499cd316d73a16cbb, type: 3}
+  frontSprite2: {fileID: 21300000, guid: 9927f15c3868f77468c770b8abf34a86, type: 3}
+  frontSpriteShiny: {fileID: 21300000, guid: 2079a8dd856bb784eb878230e86af407, type: 3}
+  frontSpriteShiny2: {fileID: 21300000, guid: f7464fabe200afd4e8d26c2d7cc2a2ea, type: 3}
+  backSprite: {fileID: 21300000, guid: 7eaacf92792af6b448a6f913959d8980, type: 3}
+  backSprite2: {fileID: 21300000, guid: 01825cf5932575a4185d99ffc92b1af4, type: 3}
+  backSpriteShiny: {fileID: 21300000, guid: de5d276fc332330439c1be2ebd3132d1, type: 3}
+  backSpriteShiny2: {fileID: 21300000, guid: 943c048e6c4e3634e87d9b79d89d305f, type: 3}
+  type1: 11
+  type2: 0
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: c9c076f39a483d54eb27d11401df72e1, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 60277d94bf23d1f41959a991fffef8f7, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 676b4e7b5bdae666ba72dfca5904ba7c, type: 2}
+    level: 3
+  maxHP: 44
+  attack: 48
+  defense: 65
+  spAttack: 50
+  spDefense: 64
+  speed: 43
+  hpIV: 0
+  attackIV: 0
+  defenseIV: 0
+  spAttackIV: 0
+  spDefenseIV: 0
+  speedIV: 0
+  hpEV: 0
+  attackEV: 0
+  defenseEV: 0
+  spAttackEV: 0
+  spDefenseEV: 0
+  speedEV: 0
