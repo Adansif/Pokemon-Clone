@@ -23,6 +23,8 @@ public class Pokemon
     public List<Move> Moves {get; set;}
     public Dictionary<Stat, int> Stats{get; private set;}
     public Dictionary<Stat, int> StatBoost{get; private set;}
+    public Conditions Status {get; private set;}
+    public bool HpChanged {get; set;}
 
     public Queue<string> StatusChanges{get; private set;} = new Queue<string>();
     //Se usa para almacenar una lista de elementos pero puedes sacar elementos de ella
@@ -138,18 +140,28 @@ public class Pokemon
         float d = a * move._base.Power * ((float) attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
 
-        HP -= damage;
-
-        if (HP <= 0){
-            HP = 0;
-            damageDetails.isFainted = true;
-        }
+        UpdateHP(damage);
         return damageDetails;
+    }
+
+    public void UpdateHP (int damage){
+        HP = Mathf.Clamp(HP - damage, 0, MaxHP);
+        HpChanged = true;
+    }
+
+    public void SetStatus(ConditionID conditionID){
+        Status = ConditionsDB.Conditions[conditionID];
+        StatusChanges.Enqueue($"{Base.Name} {Status.StartMsg}");
     }
 
     public Move getRandomMove(){
         int random = Random.Range(0, Moves.Count);
         return Moves[random];
+    }
+
+    public void OnAfterTurn(){
+        
+        Status?.OnAfterTurn?.Invoke(this);
     }
 
     public void OnBattleOver(){

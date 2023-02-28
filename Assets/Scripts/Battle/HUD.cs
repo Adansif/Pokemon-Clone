@@ -30,6 +30,9 @@ public class HUD : MonoBehaviour
     }
 
     public IEnumerator updateHP(){
-        yield return HPBar.setHPSmooth((float)  _pokemon.HP / _pokemon.MaxHP);
+        if (_pokemon.HpChanged){
+            yield return HPBar.setHPSmooth((float)  _pokemon.HP / _pokemon.MaxHP);
+            _pokemon.HpChanged = false;
+        }
     }
 }

@@ -113,7 +113,7 @@ public class BattleSystem : MonoBehaviour
             }else if(currentAction == 2){
                 //TODO: Bag menu
             }else if(currentAction == 3){
-                // TODO: add run
+                battleOver(true);
             }
         }
     }
@@ -204,11 +204,16 @@ public class BattleSystem : MonoBehaviour
     
     IEnumerator RunMoveEffects(Move move, Pokemon source, Pokemon target){
         var effects = move._base.Effects;
+        //Stat boosting
             if (effects.Boosts != null){
                 if (move._base.Target == MoveTarget.Self){
                     source.ApplyBoost(effects.Boosts);
                 } else{
                     target.ApplyBoost(effects.Boosts);
+                }
+        // Status condition
+                if (effects.Status != ConditionID.none){
+                    target.SetStatus(effects.Status);
                 }
                 yield return ShowStatusChanges(source);
                 yield return ShowStatusChanges(target);
@@ -222,18 +227,18 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    IEnumerator RunMove(PokemonUnit sorceUnit, PokemonUnit targetUnit, Move move){
+    IEnumerator RunMove(PokemonUnit sourceUnit, PokemonUnit targetUnit, Move move){
         move.PP--;
-        yield return dialogBox.TypeDialog($"{sorceUnit.Pokemon.Base.Name} used {move._base.Name}");
+        yield return dialogBox.TypeDialog($"{sourceUnit.Pokemon.Base.Name} used {move._base.Name}");
 
-    sorceUnit.playAttackAnimation();
+    sourceUnit.playAttackAnimation();
         yield return new WaitForSeconds(1f);
         targetUnit.playHitAnimation();
 
         if (move._base.Category == MoveCategory.Status){
-            yield return RunMoveEffects(move, sorceUnit.Pokemon, targetUnit.Pokemon);
+            yield return RunMoveEffects(move, sourceUnit.Pokemon, targetUnit.Pokemon);
         } else{
-            var damageDetails = targetUnit.Pokemon.isTakingDamage(move,sorceUnit.Pokemon);
+            var damageDetails = targetUnit.Pokemon.isTakingDamage(move,sourceUnit.Pokemon);
             yield return targetUnit.Hud.updateHP();
             playerPokemon.Hud.updateHPText(playerPokemon.Pokemon);
             yield return showDamageDetails(damageDetails);
@@ -246,6 +251,17 @@ public class BattleSystem : MonoBehaviour
             targetUnit.playFaintAnimation();
             yield return new WaitForSeconds(2f);
             checkForBattleOver(targetUnit);
+        }
+
+        // Statuses like burn or poisoned will hurt the pokemon after every turn
+        sourceUnit.Pokemon.OnAfterTurn();
+        yield return ShowStatusChanges(sourceUnit.Pokemon);
+        yield return sourceUnit.Hud.updateHP();
+         if (sourceUnit.Pokemon.HP <= 0){
+            yield return dialogBox.TypeDialog($"{sourceUnit.Pokemon.Base.Name} has fainted");
+            sourceUnit.playFaintAnimation();
+            yield return new WaitForSeconds(2f);
+            checkForBattleOver(sourceUnit);
         }
     }
     IEnumerator showDamageDetails(DamageDetails damageDetails){
