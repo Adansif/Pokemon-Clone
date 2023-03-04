@@ -11,5 +11,7 @@ public class Conditions
 
    public string StartMsg {set; get;}
    
+   public Func<Pokemon, bool> OnBeforeMove {get; set;} //Use Func cause Action doesnt let return anything and we need to return a bool
    public Action<Pokemon> OnAfterTurn {get; set;}
+   public Action<Pokemon> OnStart{get; set;}
 }

@@ -228,6 +228,14 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator RunMove(PokemonUnit sourceUnit, PokemonUnit targetUnit, Move move){
+
+        bool canRunMove = sourceUnit.Pokemon.OnBeforeMove();
+        if (!canRunMove){
+            yield return ShowStatusChanges(sourceUnit.Pokemon);
+            yield break;
+        }
+        yield return ShowStatusChanges(sourceUnit.Pokemon);
+
         move.PP--;
         yield return dialogBox.TypeDialog($"{sourceUnit.Pokemon.Base.Name} used {move._base.Name}");
 
