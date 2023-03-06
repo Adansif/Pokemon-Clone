@@ -106,10 +106,11 @@ public class BattleSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z)){
             if (currentAction == 0){
+                currentInput = 0;
                 moveSelection();
             }else if(currentAction == 1){
-                openPartyScreen();
                 currentInput = 0;
+                openPartyScreen();
             }else if(currentAction == 2){
                 //TODO: Bag menu
             }else if(currentAction == 3){
@@ -130,6 +131,7 @@ public class BattleSystem : MonoBehaviour
             dialogBox.enableMoveSelector(false);
             dialogBox.enableDialogText(true);
             StartCoroutine(playerMove());
+            currentInput = 0;
         } else if (Input.GetKeyDown(KeyCode.X)){
                 dialogBox.enableMoveSelector(false);
                 dialogBox.enableDialogText(true);
@@ -149,10 +151,12 @@ public class BattleSystem : MonoBehaviour
             var selectedMember = playerParty.Pokemons[currentMember];
             if (selectedMember.HP <= 0){
                 partyScreen.setMessageText("You can't send out a fainted pokemon");
+                currentInput = 0;
                 return;
             }
             if (selectedMember == playerPokemon.Pokemon){
                 partyScreen.setMessageText("You can't switch with the same pokemon");
+                currentInput = 0;
                 return;
             }
             partyScreen.gameObject.SetActive(false);

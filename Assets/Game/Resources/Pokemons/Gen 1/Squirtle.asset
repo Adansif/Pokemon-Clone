@@ -22,6 +22,7 @@ MonoBehaviour:
   backSprite2: {fileID: 21300000, guid: 01825cf5932575a4185d99ffc92b1af4, type: 3}
   backSpriteShiny: {fileID: 21300000, guid: de5d276fc332330439c1be2ebd3132d1, type: 3}
   backSpriteShiny2: {fileID: 21300000, guid: 943c048e6c4e3634e87d9b79d89d305f, type: 3}
+  icon: {fileID: 21300000, guid: 2441463e111ab0cb79cf421282daccb7, type: 3}
   type1: 11
   type2: 0
   learnableMoves:

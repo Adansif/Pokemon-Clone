@@ -29,7 +29,7 @@ public class ConditionsDB
             }
         },
         {
-            ConditionID.brn,
+            ConditionID.brn,                // Creates the status for being poisoned. Need to aply the half damage
             new Conditions(){
                 Name = "Burn",
                 StartMsg = "has been burned",

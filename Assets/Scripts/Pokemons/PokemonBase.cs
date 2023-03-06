@@ -21,6 +21,8 @@ public class PokemonBase : ScriptableObject
     [SerializeField] Sprite backSpriteShiny;
     [SerializeField] Sprite backSpriteShiny2;
 
+    [SerializeField] Sprite icon;
+
     [SerializeField] PokemonType type1;
     [SerializeField] PokemonType type2;
 
@@ -86,6 +88,10 @@ public class PokemonBase : ScriptableObject
     }
     public Sprite BackSpriteShiny2{
         get {return this.backSpriteShiny2;}
+    }
+
+    public Sprite Icon{
+        get {return this.icon;}
     }
 
     public int MaxHP{
