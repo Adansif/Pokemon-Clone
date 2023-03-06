@@ -18,9 +18,14 @@ public class PartyMemberUI : MonoBehaviour
     private Color originalColor;
 
     Pokemon _pokemon;
+    Vector3 originalPosition;
 
-    public void Update(){
+    private void Awake(){
+        
+    }
+    public void Start(){
         icon.sprite = _pokemon.Base.Icon;
+        originalPosition = icon.transform.localPosition;
         
     }
 
@@ -29,8 +34,8 @@ public class PartyMemberUI : MonoBehaviour
 
         nameText.text = pokemon.Base.Name;
         levelText.text = "Lv " + pokemon.Level;
-        //maxHPText.text =pokemon.MaxHP.ToString();
-        //currentHPText.text = pokemon.HP.ToString();
+        maxHPText.text =pokemon.MaxHP.ToString();
+        currentHPText.text = pokemon.HP.ToString();
         HPBar.SetHP((float)  pokemon.HP / pokemon.MaxHP);        
     }
 
@@ -41,8 +46,21 @@ public class PartyMemberUI : MonoBehaviour
         imagen = GetComponent<Image>();
         if (isSelected){
             imagen.sprite = selectedSprite;
+            icon.transform.localPosition = originalPosition;
         } else{
              imagen.sprite = unselectedSprite;
+            AnimateIcon();
         }
+    }
+
+    public void AnimateIcon()
+    {
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(icon.rectTransform.DOAnchorPosY(originalPosition.y, 0.1f));
+
+        sequence.Append(icon.rectTransform.DOAnchorPosY(30f, 0.1f));
+
+        sequence.SetLoops(-1);
     }
 }

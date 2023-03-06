@@ -38,7 +38,7 @@ public class PokemonUnit : MonoBehaviour
   public void Setup(Pokemon pokemon){
     Pokemon = pokemon;
     
-    if (Random.Range(1,11) <= 5){
+    if (pokemon.IsShiny()){
       image.sprite = isPlayerPokemon? Pokemon.Base.BackSpriteShiny: Pokemon.Base.FrontSpriteShiny;
     } else {
           image.sprite = isPlayerPokemon? Pokemon.Base.BackSprite: Pokemon.Base.FrontSprite;

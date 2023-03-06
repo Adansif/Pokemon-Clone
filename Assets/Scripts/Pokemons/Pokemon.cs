@@ -7,6 +7,7 @@ public class Pokemon
 {
     [SerializeField] PokemonBase _base;
     [SerializeField] int level;
+    public bool isShiny;
     public PokemonBase Base {
         get{
             return this._base;
@@ -46,6 +47,7 @@ public class Pokemon
         HP = MaxHP;
 
         ResetStatBoost();
+        CheckIfShiny();
     }
 
     void ResetStatBoost(){
@@ -116,6 +118,9 @@ public class Pokemon
     public int Speed{
         get {return getStat(Stat.Speed);}
     }
+    public bool IsShiny(){
+        return this.isShiny;
+    }
     public int MaxHP{ get; private set; }
 
     public DamageDetails isTakingDamage(Move move, Pokemon attacker){
@@ -178,6 +183,13 @@ public class Pokemon
 
     public void OnBattleOver(){
         ResetStatBoost();
+    }
+    private void CheckIfShiny(){
+         if (Random.Range(1,11) <= 5){
+            isShiny = true;
+        } else{
+            isShiny = false;
+        }
     }
 }
 
