@@ -33,7 +33,7 @@ RectTransform:
   m_Children:
   - {fileID: 6213604314219160684}
   m_Father: {fileID: 6213604313492268708}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -206,8 +206,8 @@ RectTransform:
   - {fileID: 6213604314039641286}
   - {fileID: 6213604314108858008}
   - {fileID: 6213604313508836807}
-  - {fileID: 6213604312609456282}
   - {fileID: 4100754577076040769}
+  - {fileID: 6213604312609456282}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -271,9 +271,9 @@ MonoBehaviour:
   HPBar: {fileID: 6213604312609456277}
   currentHPText: {fileID: 6213604313508836806}
   maxHPText: {fileID: 6213604314108858011}
-  selectedSprite: {fileID: 0}
-  unselectedSprite: {fileID: 0}
-  icon: {fileID: 0}
+  selectedSprite: {fileID: 21300000, guid: 79b3a82bc09ba7745a1ce9b198cfd9bb, type: 3}
+  unselectedSprite: {fileID: 21300000, guid: 5c9c4c38c4abfaa4f9be53a975f36fec, type: 3}
+  icon: {fileID: 8340428112151026599}
 --- !u!1 &6213604313508836804
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +602,7 @@ GameObject:
   - component: {fileID: 1792998286225640639}
   - component: {fileID: 8340428112151026599}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -621,7 +621,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6213604313492268708}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

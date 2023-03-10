@@ -57,9 +57,9 @@ public class PartyMemberUI : MonoBehaviour
     {
         Sequence sequence = DOTween.Sequence();
 
-        sequence.Append(icon.rectTransform.DOAnchorPosY(originalPosition.y, 0.1f));
+        sequence.Append(icon.rectTransform.DOAnchorPosY(originalPosition.y, 0.15f));
 
-        sequence.Append(icon.rectTransform.DOAnchorPosY(30f, 0.1f));
+        sequence.Append(icon.rectTransform.DOAnchorPosY(30f, 0.15f));
 
         sequence.SetLoops(-1);
     }

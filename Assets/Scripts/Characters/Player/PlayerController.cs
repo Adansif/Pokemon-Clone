@@ -37,8 +37,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     public void HandleUpdate()
     {
-
-         
         //Aqui empieza el movimiento
         if (!isMoving){
             input.x = Input.GetAxisRaw("Horizontal");
@@ -66,8 +64,8 @@ public class PlayerController : MonoBehaviour
         }
         //Aqui ya ha acabado el movimiento
         animator.SetBool("isMoving", isMoving);       
-        
-    }
+    }e recommended that...
+
     IEnumerator Move(Vector3 targetPosition){
         plantAnimation.disableAnimation();       //No mover el plantAnimation ni el coverPlant porque no se ni como hice que funcionara
         coverPlant.removeLayer();
@@ -79,12 +77,10 @@ public class PlayerController : MonoBehaviour
         }
         transform.position = targetPosition;
 
-
         plantAnimation.setAnimation();      //No mover el plantAnimation ni el coverPlant porque no se ni como hice que funcionara
         coverPlant.setLayer();
         isMoving = false;
         
-
         chechIfEncounter();
     }
     //Nos va a permitir saber si el objeto que tenemos enfrente va a collisionar con nosotros
@@ -94,6 +90,7 @@ public class PlayerController : MonoBehaviour
         }
         return true;
     }
+    
     private void chechIfEncounter(){
         if (inGrass()){
             if (UnityEngine.Random.Range(1,101) <= 10){ //Colocamos UnityEngine delante de Random para que se diferencie del random de Using.
