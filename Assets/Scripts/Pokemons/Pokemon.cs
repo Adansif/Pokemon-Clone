@@ -25,8 +25,11 @@ public class Pokemon
     public Dictionary<Stat, int> Stats{get; private set;}
     public Dictionary<Stat, int> StatBoost{get; private set;}
     public Conditions Status {get; private set;}
+     public Conditions VolatileStatus {get; private set;}
     public int StatusTime{get; set;}
+    public int VolatileStatusTime{get; set;}
     public bool HpChanged {get; set;}
+    public event System.Action OnStatusChanged;
 
     public Queue<string> StatusChanges{get; private set;} = new Queue<string>();
     //Se usa para almacenar una lista de elementos pero puedes sacar elementos de ella
@@ -47,6 +50,8 @@ public class Pokemon
         HP = MaxHP;
 
         ResetStatBoost();
+        CureStatus();
+        CureVolatileStatus();
         CheckIfShiny();
     }
 
@@ -68,7 +73,7 @@ public class Pokemon
         Stats.Add(Stat.SpDefense, Mathf.FloorToInt(((2 * Base.SpDefense)+ Base.SpDefenseIV + (Base.SpDefenseEV/4) * Level)/100f) + 5);
         Stats.Add(Stat.Speed, Mathf.FloorToInt(((2 * Base.Speed)+ Base.SpeedIV + (Base.SpeedEV/4) * Level)/100f) + 5);
 
-        MaxHP = Mathf.FloorToInt(((2 * Base.MaxHP)+ Base.HPIV + (Base.HPEV/4) * Level)/100f) + (10 + Level);
+        MaxHP = Mathf.FloorToInt(((2 * Base.MaxHP)+ Base.HPIV + (Base.HPEV/4) * Level)/100f) + 10 + Level;
     }
 
     int getStat(Stat stat){
@@ -154,14 +159,29 @@ public class Pokemon
         HpChanged = true;
     }
 
+    public void SetVolatileStatus(ConditionID conditionID){
+        if (VolatileStatus != null) return;
+
+        VolatileStatus = ConditionsDB.Conditions[conditionID];
+        VolatileStatus?.OnStart?.Invoke(this);
+        StatusChanges.Enqueue($"{Base.Name} {VolatileStatus.StartMsg}");
+    }
     public void SetStatus(ConditionID conditionID){
+        if (Status != null) return;
+
         Status = ConditionsDB.Conditions[conditionID];
         Status?.OnStart?.Invoke(this);
         StatusChanges.Enqueue($"{Base.Name} {Status.StartMsg}");
+        OnStatusChanged?.Invoke();
     }
 
     public void CureStatus(){
         Status = null;
+        OnStatusChanged?.Invoke();
+    }
+
+     public void CureVolatileStatus(){
+        VolatileStatus = null;
     }
 
     public Move getRandomMove(){
@@ -170,18 +190,29 @@ public class Pokemon
     }
 
     public bool OnBeforeMove(){
+        bool canPerformMove = true;
         if(Status?.OnBeforeMove != null){
-            return Status.OnBeforeMove(this);
+            if(!Status.OnBeforeMove(this)){
+                canPerformMove = false;
+            }
         }
-        return true;
+
+        if(VolatileStatus?.OnBeforeMove != null){
+            if(!VolatileStatus.OnBeforeMove(this)){
+                canPerformMove = false;
+            }
+        }
+
+        return canPerformMove;
     }
 
     public void OnAfterTurn(){
-        
         Status?.OnAfterTurn?.Invoke(this);
+        VolatileStatus?.OnAfterTurn?.Invoke(this);
     }
 
     public void OnBattleOver(){
+        CureVolatileStatus();
         ResetStatBoost();
     }
     private void CheckIfShiny(){

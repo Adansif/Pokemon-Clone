@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
         }
         //Aqui ya ha acabado el movimiento
         animator.SetBool("isMoving", isMoving);       
-    }e recommended that...
+    }
 
     IEnumerator Move(Vector3 targetPosition){
         plantAnimation.disableAnimation();       //No mover el plantAnimation ni el coverPlant porque no se ni como hice que funcionara

@@ -12,6 +12,8 @@ public class HUD : MonoBehaviour
     [SerializeField] HPBar HPBar;
     [SerializeField] Text currentHPText;
     [SerializeField] Text maxHPText;
+    [SerializeField] Image statusImage;
+    public List<Sprite> statusSprites;
 
     Pokemon _pokemon;
 
@@ -22,6 +24,32 @@ public class HUD : MonoBehaviour
         levelText.text = "Lv " + pokemon.Level;
         
         HPBar.SetHP((float)  pokemon.HP / pokemon.MaxHP);
+
+        SetStatusImage();
+        _pokemon.OnStatusChanged += SetStatusImage;
+    }
+
+    public void SetStatusImage(){
+        if(_pokemon.Status == null){
+            statusImage.enabled = false;
+        }else{
+           if(_pokemon.Status.Id.ToString().Equals("brn")){
+                statusImage.sprite = statusSprites[0];
+                statusImage.enabled = true;
+           }else if(_pokemon.Status.Id.ToString().Equals("frz")){
+                statusImage.sprite = statusSprites[1];
+           }else if(_pokemon.Status.Id.ToString().Equals("psn") || _pokemon.Status.Id.ToString().Equals("bpsn")){
+                statusImage.sprite = statusSprites[2];
+                statusImage.enabled = true;
+           }else if(_pokemon.Status.Id.ToString().Equals("par")){
+                statusImage.sprite = statusSprites[3];
+                statusImage.enabled = true;
+                statusImage.enabled = true;
+           }else if(_pokemon.Status.Id.ToString().Equals("sle")){
+                statusImage.sprite = statusSprites[4];
+                statusImage.enabled = true;
+           }
+        }
     }
 
     public void updateHPText(Pokemon pokemon){
