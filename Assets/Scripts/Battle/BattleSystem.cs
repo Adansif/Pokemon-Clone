@@ -181,7 +181,37 @@ public class BattleSystem : MonoBehaviour
         return currentInput;
     }
     
+bool checkIfMoveHits(Move move, Pokemon sourcePokemon, Pokemon targetPokemon){
+    
+    if(move._base.AlwaysHit){
+        return true;
+    }
+    
+    float moveAccuracy = move._base.Accuracy;
 
+    int accuracy = sourcePokemon.StatBoost[Stat.Accuracy];
+    int evasion = targetPokemon.StatBoost[Stat.Evasion];
+
+    var boostValues = new float[] {1f, 4f/3f, 5f/3f, 2f, 7f/3f, 8f/3f, 3f};
+
+    if (accuracy > 0){
+        moveAccuracy *= boostValues[accuracy];
+    }else{
+        moveAccuracy /= boostValues[-accuracy];
+    }
+
+    if (evasion > 0){
+        moveAccuracy /= boostValues[evasion];
+    }else{
+        moveAccuracy *= boostValues[-evasion];
+    }
+
+    if (UnityEngine.Random.Range(1, 101) <= moveAccuracy){
+        return true;
+    }else {
+        return false;
+    }
+}
     IEnumerator playerMove(){
         state = battleState.performMove;
 
@@ -206,11 +236,11 @@ public class BattleSystem : MonoBehaviour
         }
     }
     
-    IEnumerator RunMoveEffects(Move move, Pokemon source, Pokemon target){
-        var effects = move._base.Effects;
+    IEnumerator RunMoveEffects(MoveEffects effects, Pokemon source, Pokemon target, MoveTarget moveTarget){
+       
         //Stat boosting
             if (effects.Boosts != null){
-                if (move._base.Target == MoveTarget.Self){
+                if (moveTarget == MoveTarget.Self){
                     source.ApplyBoost(effects.Boosts);
                 } else{
                     target.ApplyBoost(effects.Boosts);
@@ -248,26 +278,40 @@ public class BattleSystem : MonoBehaviour
         move.PP--;
         yield return dialogBox.TypeDialog($"{sourceUnit.Pokemon.Base.Name} used {move._base.Name}");
 
-    sourceUnit.playAttackAnimation();
-        yield return new WaitForSeconds(1f);
-        targetUnit.playHitAnimation();
-
-        if (move._base.Category == MoveCategory.Status){
-            yield return RunMoveEffects(move, sourceUnit.Pokemon, targetUnit.Pokemon);
-        } else{
-            var damageDetails = targetUnit.Pokemon.isTakingDamage(move,sourceUnit.Pokemon);
-            yield return targetUnit.Hud.updateHP();
-            playerPokemon.Hud.updateHPText(playerPokemon.Pokemon);
-            yield return showDamageDetails(damageDetails);
-        }
+        if(checkIfMoveHits(move, sourceUnit.Pokemon, targetUnit.Pokemon)){
 
         
 
-        if (targetUnit.Pokemon.HP <= 0){
-            yield return dialogBox.TypeDialog($"{targetUnit.Pokemon.Base.Name} has fainted");
-            targetUnit.playFaintAnimation();
-            yield return new WaitForSeconds(2f);
-            checkForBattleOver(targetUnit);
+            sourceUnit.playAttackAnimation();
+            yield return new WaitForSeconds(1f);
+            targetUnit.playHitAnimation();
+
+            if (move._base.Category == MoveCategory.Status){
+                yield return RunMoveEffects(move._base.Effects, sourceUnit.Pokemon, targetUnit.Pokemon, move._base.Target);
+            } else{
+                var damageDetails = targetUnit.Pokemon.isTakingDamage(move,sourceUnit.Pokemon);
+                yield return targetUnit.Hud.updateHP();
+                playerPokemon.Hud.updateHPText(playerPokemon.Pokemon);
+                yield return showDamageDetails(damageDetails);
+            }
+
+            if(move._base.SecondaryEffects != null && move._base.SecondaryEffects.Count > 0 && targetUnit.Pokemon.HP > 0){
+                foreach (var secondary in move._base.SecondaryEffects){
+                    var random = UnityEngine.Random.Range(1,101);
+                    if(random <= secondary.Chance){
+                        yield return RunMoveEffects(secondary, sourceUnit.Pokemon, targetUnit.Pokemon, secondary.Target);
+                    }
+                }
+            }
+
+            if (targetUnit.Pokemon.HP <= 0){
+                yield return dialogBox.TypeDialog($"{targetUnit.Pokemon.Base.Name} has fainted");
+                targetUnit.playFaintAnimation();
+                yield return new WaitForSeconds(2f);
+                checkForBattleOver(targetUnit);
+            }
+        }else{
+             yield return dialogBox.TypeDialog($"{targetUnit.Pokemon.Base.Name}'s attack missed");
         }
 
         // Statuses like burn or poisoned will hurt the pokemon after every turn

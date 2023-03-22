@@ -25,7 +25,7 @@ public class Pokemon
     public Dictionary<Stat, int> Stats{get; private set;}
     public Dictionary<Stat, int> StatBoost{get; private set;}
     public Conditions Status {get; private set;}
-     public Conditions VolatileStatus {get; private set;}
+    public Conditions VolatileStatus {get; private set;}
     public int StatusTime{get; set;}
     public int VolatileStatusTime{get; set;}
     public bool HpChanged {get; set;}
@@ -62,6 +62,8 @@ public class Pokemon
             {Stat.SpAttack, 0},
             {Stat.SpDefense, 0},
             {Stat.Speed, 0},
+            {Stat.Accuracy, 0},
+            {Stat.Evasion, 0},
         };
     }
 

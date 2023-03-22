@@ -220,7 +220,11 @@ public enum Stat{ //Esto es para crear un dictionary para los stats
     Defense,
     SpAttack,
     SpDefense,
-    Speed
+    Speed,
+
+    // Boost for accuracy
+    Accuracy,
+    Evasion
 
 }
 

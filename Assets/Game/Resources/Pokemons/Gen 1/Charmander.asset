@@ -31,7 +31,7 @@ MonoBehaviour:
   - moveBase: {fileID: 11400000, guid: 60277d94bf23d1f41959a991fffef8f7, type: 2}
     level: 4
   - moveBase: {fileID: 11400000, guid: 3a028393ffb3e674c9ce0ad8ea057afc, type: 2}
-    level: 7
+    level: 3
   maxHP: 39
   attack: 52
   defense: 43

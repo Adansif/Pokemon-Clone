@@ -8,10 +8,6 @@ public class CoverPlant : MonoBehaviour
 
     [SerializeField] PlayerController player;
     private SpriteRenderer sprite;
-
-    public CoverPlant(){
-
-    }
         
     public void Start(){
         sprite = GetComponent<SpriteRenderer>();

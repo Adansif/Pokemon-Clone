@@ -37,7 +37,7 @@ public class ConditionsDB
             }
         },
         {
-            ConditionID.brn,                // Creates the status for being poisoned. Need to aply the half damage
+            ConditionID.brn,                // Creates the status burned on the pokemon. TODO: apply the half damage on physical damage
             new Conditions(){
                 Name = "Burn",
                 StartMsg = "has been burned",
@@ -48,7 +48,7 @@ public class ConditionsDB
             }
         },
         {
-            ConditionID.par,
+            ConditionID.par,                // Creates the status paralyzed on the pokemon. TODO: apply half speed
             new Conditions(){
                 Name = "Paralyze",
                 StartMsg = "has been paralyzed",
@@ -62,12 +62,12 @@ public class ConditionsDB
             }
         },
         {
-            ConditionID.frz,
+            ConditionID.frz,                // Creates the status frozen on the pokemon.
             new Conditions(){
                 Name = "Freeze",
                 StartMsg = "has been frozen",
                 OnBeforeMove =(Pokemon pokemon) =>{
-                    if (Random.Range(1, 5) == 1){
+                    if (Random.Range(1, 5) == 1){               // Freeze for 1-4 turns
                         pokemon.CureStatus();
                         pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} is not frozen anymore");
                         return true;
@@ -83,8 +83,7 @@ public class ConditionsDB
                 Name = "Sleep",
                 StartMsg = "has fallen asleep",
                 OnStart = (Pokemon pokemon)=>{
-                    // Sleep for 1-3 turns
-                    pokemon.StatusTime = Random.Range(1,4);
+                    pokemon.StatusTime = Random.Range(1,4);             // Sleep for 1-3 turns
                     Debug.Log($"Will be asleep for {pokemon.StatusTime} moves");
                 },
                 OnBeforeMove =(Pokemon pokemon) =>{
@@ -101,15 +100,16 @@ public class ConditionsDB
                 }
             }
         },
+
         //Volatile status
+
         {
             ConditionID.confusion,
             new Conditions(){
                 Name = "Confusion",
                 StartMsg = "has been confused",
                 OnStart = (Pokemon pokemon)=>{
-                    // Sleep for 1-4 turns
-                    pokemon.VolatileStatusTime = Random.Range(1,5);
+                    pokemon.VolatileStatusTime = Random.Range(1,5);                 // Confused for 1-4 turns
                     Debug.Log($"Will be confused for {pokemon.VolatileStatusTime} moves");
                 },
                 OnBeforeMove =(Pokemon pokemon) =>{
@@ -122,13 +122,13 @@ public class ConditionsDB
 
                     pokemon.VolatileStatusTime--;
 
-                    //50% odds to make a move
-                    if(Random.Range(1,3) == 1){
+                    if(Random.Range(1,3) == 1){             //50% odds to make a move
+                        pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} is confused");
                         return true;
                     }
 
                     pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} is confused");
-                    pokemon.UpdateHP(pokemon.Attack);
+                    pokemon.UpdateHP(pokemon.MaxHP/8);
                     pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} hurt himself due to confusion");
                     return false;
                 }
@@ -139,6 +139,12 @@ public class ConditionsDB
 
 
  public enum ConditionID{
-        none, psn, bpsn, brn, sle, par, frz,
+        
+        none,
+
+        //Status
+        psn, bpsn, brn, sle, par, frz,
+
+        //Volatile status
         confusion
     }

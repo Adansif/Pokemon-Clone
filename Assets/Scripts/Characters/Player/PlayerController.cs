@@ -6,16 +6,16 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] CoverPlant coverPlant;
-    [SerializeField] GrassAnimation plantAnimation;
+    [SerializeField] List<GrassAnimation> plantAnimations;
+
     public float moveSpeed;
+    private bool isMoving;
+    private bool isAbleToRun = true;
+
     public LayerMask CollisionObjectsLayer;
     public LayerMask grassLayer;
     public event Action OnEncountered;
-
-    //public GameObject coverGrass;
-    private bool isMoving;
     private  Vector2 input;
-
     private Animator animator;
 
     public PlayerController(){
@@ -36,38 +36,45 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     public void HandleUpdate()
+{
+    // Aquí verificamos si se está corriendo o caminando
+    if (Input.GetKey(KeyCode.LeftShift) && isAbleToRun)
     {
-        //Aqui empieza el movimiento
-        if (!isMoving){
-            input.x = Input.GetAxisRaw("Horizontal");
-            input.y = Input.GetAxisRaw("Vertical");
-            
-
-            //Elimina el movimiento en diagonal
-            if (input.x != 0) input.y = 0;
-
-            if (input != Vector2.zero){
-                // Aqui estamos dandole valor a moveX y mmoveY, que son los float de la animacion, con input que es la variable creada arriba en funcion a vector2
-                animator.SetFloat("moveX", input.x);
-                animator.SetFloat("moveY", input.y);
-
-            
-
-                var targetPosition = transform.position;
-                targetPosition.x += input.x;
-                targetPosition.y += input.y;
-                
-
-                if (isAbleToWalk(targetPosition))
-                    StartCoroutine(Move(targetPosition));
-            }
-        }
-        //Aqui ya ha acabado el movimiento
-        animator.SetBool("isMoving", isMoving);       
+        moveSpeed = 6f;
+    }
+    else
+    {
+        moveSpeed = 3f;
     }
 
+    // Aquí comienza el movimiento
+    if (!isMoving)
+    {
+        input.x = Input.GetAxisRaw("Horizontal");
+        input.y = Input.GetAxisRaw("Vertical");
+
+        // Elimina el movimiento en diagonal
+        if (input.x != 0) input.y = 0;
+
+        if (input != Vector2.zero)
+        {
+            animator.SetFloat("moveX", input.x);
+            animator.SetFloat("moveY", input.y);
+
+            var targetPosition = transform.position;
+            targetPosition.x += input.x;
+            targetPosition.y += input.y;
+
+            if (isAbleToWalk(targetPosition))
+                StartCoroutine(Move(targetPosition));
+        }
+    }
+
+    // Aquí finaliza el movimiento
+    animator.SetBool("isMoving", isMoving);
+}
+
     IEnumerator Move(Vector3 targetPosition){
-        plantAnimation.disableAnimation();       //No mover el plantAnimation ni el coverPlant porque no se ni como hice que funcionara
         coverPlant.removeLayer();
         isMoving = true;      
 
@@ -77,7 +84,10 @@ public class PlayerController : MonoBehaviour
         }
         transform.position = targetPosition;
 
-        plantAnimation.setAnimation();      //No mover el plantAnimation ni el coverPlant porque no se ni como hice que funcionara
+        foreach (var plantAnimation in plantAnimations) {
+            StartCoroutine(plantAnimation.setAnimation());     
+        }
+        
         coverPlant.setLayer();
         isMoving = false;
         
