@@ -13,7 +13,9 @@ public class HUD : MonoBehaviour
     [SerializeField] Text currentHPText;
     [SerializeField] Text maxHPText;
     [SerializeField] Image statusImage;
+    [SerializeField] Image HPBarColor;
     public List<Sprite> statusSprites;
+    [SerializeField] List<Sprite> healthSprite;
 
     Pokemon _pokemon;
 
@@ -26,6 +28,7 @@ public class HUD : MonoBehaviour
         HPBar.SetHP((float)  pokemon.HP / pokemon.MaxHP);
 
         SetStatusImage();
+        setBarColor(_pokemon);
         _pokemon.OnStatusChanged += SetStatusImage;
     }
 
@@ -49,6 +52,16 @@ public class HUD : MonoBehaviour
                 statusImage.sprite = statusSprites[4];
                 statusImage.enabled = true;
            }
+        }
+    }
+
+    public void setBarColor(Pokemon pokemon){
+        if(pokemon.HP <= pokemon.MaxHP/4){
+            HPBarColor.sprite = healthSprite[2];
+        }else if(pokemon.HP <= pokemon.MaxHP/2){
+            HPBarColor.sprite = healthSprite[1];
+        }else{
+             HPBarColor.sprite = healthSprite[0];
         }
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -22,6 +23,7 @@ public class Pokemon
     public int HP {get; set;}
 
     public List<Move> Moves {get; set;}
+    public Move CurrentMove{get; set;}
     public Dictionary<Stat, int> Stats{get; private set;}
     public Dictionary<Stat, int> StatBoost{get; private set;}
     public Conditions Status {get; private set;}
@@ -136,7 +138,7 @@ public class Pokemon
             critical = 2f;
         }
 
-        float type = TypeChart.getEffectiveness(move._base.Type, attacker.Base.Type1) * TypeChart.getEffectiveness(move._base.Type, attacker.Base.Type2);
+        float type = TypeChart.getEffectiveness(move._base.Type, this.Base.Type1) * TypeChart.getEffectiveness(move._base.Type, this.Base.Type2);
 
         var damageDetails = new DamageDetails(){
             TypeEffectiveness = type,
@@ -151,6 +153,10 @@ public class Pokemon
         float a = (2 * attacker.Level + 10) / 250f;
         float d = a * move._base.Power * ((float) attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
+
+        if (damage <= 0){
+            damage = 1;
+        }
 
         UpdateHP(damage);
         return damageDetails;
@@ -187,8 +193,11 @@ public class Pokemon
     }
 
     public Move getRandomMove(){
-        int random = Random.Range(0, Moves.Count);
-        return Moves[random];
+
+        var movesWithPP = Moves.Where(x =>x.PP > 0).ToList();
+
+        int random = Random.Range(0, movesWithPP.Count);
+        return movesWithPP[random];
     }
 
     public bool OnBeforeMove(){

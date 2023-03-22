@@ -13429,7 +13429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partyPokemons:
   - _base: {fileID: 11400000, guid: bf9c58aeaeba5994bbdd663f96476f62, type: 2}
-    level: 40
+    level: 3
     isShiny: 0
   - _base: {fileID: 11400000, guid: 220661412d4ead91388e62b5baaac906, type: 2}
     level: 3
@@ -22767,6 +22767,7 @@ GameObject:
   - component: {fileID: 1779938055}
   - component: {fileID: 1779938054}
   - component: {fileID: 1779938053}
+  - component: {fileID: 1779938056}
   m_Layer: 0
   m_Name: Health
   m_TagString: Untagged
@@ -22832,6 +22833,23 @@ RectTransform:
   m_AnchoredPosition: {x: 35.5651, y: 1.7999916}
   m_SizeDelta: {x: -47.550003, y: 6.16}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &1779938056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779938052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef67a6d6ef8a6d748b2a4a8066fa6269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pokemon: {fileID: 839381125}
+  healthSprite:
+  - {fileID: 21300000, guid: c3c015e56233e3c498218948d139aab7, type: 3}
+  - {fileID: 21300000, guid: 65b2f3518c113be48ba4e8dcce1685cd, type: 3}
+  - {fileID: 21300000, guid: 74a81dfb5cd88d244b1bf28e77dc8931, type: 3}
 --- !u!1 &1791421813
 GameObject:
   m_ObjectHideFlags: 0
@@ -23619,6 +23637,7 @@ GameObject:
   - component: {fileID: 1975530239}
   - component: {fileID: 1975530241}
   - component: {fileID: 1975530240}
+  - component: {fileID: 1975530242}
   m_Layer: 0
   m_Name: Health
   m_TagString: Untagged
@@ -23684,6 +23703,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975530238}
   m_CullTransparentMesh: 1
+--- !u!114 &1975530242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975530238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef67a6d6ef8a6d748b2a4a8066fa6269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pokemon: {fileID: 123682935}
+  healthSprite:
+  - {fileID: 21300000, guid: c3c015e56233e3c498218948d139aab7, type: 3}
+  - {fileID: 21300000, guid: 65b2f3518c113be48ba4e8dcce1685cd, type: 3}
+  - {fileID: 21300000, guid: 74a81dfb5cd88d244b1bf28e77dc8931, type: 3}
 --- !u!1 &2008919600
 GameObject:
   m_ObjectHideFlags: 0
