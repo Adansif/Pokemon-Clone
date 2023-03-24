@@ -35,9 +35,11 @@ public class BattleDialog : MonoBehaviour
     public void enableDialogText (bool isEnabled){
         dialogText.enabled = isEnabled;
     }
+    
     public void enableOptionSelector (bool isEnabled){
         optionSelector.SetActive(isEnabled);
     }
+
     public void enableMoveSelector (bool isEnabled){
         moveSelector.SetActive(isEnabled);
         moveDetails.SetActive(isEnabled);
@@ -52,6 +54,7 @@ public class BattleDialog : MonoBehaviour
             }
         }
     }
+
     public void updateMoveSelection(int selectedMove, Move move){
         for (int i=0; i<moveTexts.Count; i++){
             if (i == selectedMove){
@@ -60,6 +63,7 @@ public class BattleDialog : MonoBehaviour
                 moveTexts[i].color = Color.black;
             }
         }
+
         ppText.text = $"PP {move.PP}/{move._base.PP}";
         typeText.text = move._base.Type.ToString();
 

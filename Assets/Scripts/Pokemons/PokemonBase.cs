@@ -118,7 +118,7 @@ public class PokemonBase : ScriptableObject
         get {return this.speed;}
     }
 
-        public int HPIV{
+    public int HPIV{
         get {return this.hpIV;}
     }
 
@@ -142,7 +142,7 @@ public class PokemonBase : ScriptableObject
         get {return this.speed;}
     }
 
-        public int HPEV{
+    public int HPEV{
         get {return this.hpEV;}
     }
 
