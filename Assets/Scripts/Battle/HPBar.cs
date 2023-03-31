@@ -10,7 +10,6 @@ public class HPBar : MonoBehaviour
 
     public void SetHP(float hpNormalized){
         health.transform.localScale = new Vector3(hpNormalized, 1f);
-
     }
 
 // Reduce la barra de vida de manera gradual

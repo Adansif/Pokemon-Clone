@@ -18,6 +18,7 @@ public class PokemonUnit : MonoBehaviour
       return isPlayerPokemon;
     }
   }
+
   public HUD Hud{
     get{
       return HUD;
@@ -29,6 +30,7 @@ public class PokemonUnit : MonoBehaviour
   Image image;
   Color originalColor;
   Vector3 originalPosition;
+  
   private void Awake(){
     image = GetComponent<Image>();
     originalPosition = image.transform.localPosition;
@@ -41,7 +43,7 @@ public class PokemonUnit : MonoBehaviour
     if (pokemon.IsShiny()){
       image.sprite = isPlayerPokemon? Pokemon.Base.BackSpriteShiny: Pokemon.Base.FrontSpriteShiny;
     } else {
-          image.sprite = isPlayerPokemon? Pokemon.Base.BackSprite: Pokemon.Base.FrontSprite;
+      image.sprite = isPlayerPokemon? Pokemon.Base.BackSprite: Pokemon.Base.FrontSprite;
     }
 
     HUD.SetData(pokemon);

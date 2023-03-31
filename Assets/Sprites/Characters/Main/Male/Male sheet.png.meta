@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: db3506e3719c434498224371936ded99
+guid: 74f11d12d60421480affcbe0f8592ded
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_0
+      name: Male sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8050e9f2a156da5fd89945e204dbf881
-      internalID: -1262967205
+      spriteID: 440edaf5089f711cfa1b174e86d55865
+      internalID: -2080373593
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_1
+      name: Male sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -152,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1d46e7cf456df95c850de3dcc7cde6b
-      internalID: 588480259
+      spriteID: c383a1666861fb817b62c21776b5e3d0
+      internalID: -1673540394
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_2
+      name: Male sheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -173,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a2f693408033f1f79c8f8a4da1f4829
-      internalID: 1463279718
+      spriteID: 429525abec369ba50bbe4ba42646ea5b
+      internalID: -1209611752
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_3
+      name: Male sheet_3
       rect:
         serializedVersion: 2
         x: 96
@@ -194,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa2137661d95c6e0fb781b83d901d0d8
-      internalID: -1809662164
+      spriteID: a809d1d94f73b2c0aa0bb21e91550672
+      internalID: 922484701
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_4
+      name: Male sheet_4
       rect:
         serializedVersion: 2
         x: 0
@@ -215,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fd85137b90fbdf10a003eba9b46f8e4
-      internalID: -941494537
+      spriteID: fb808865d0109430eab4f5fb1c902ba9
+      internalID: -1728849623
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_5
+      name: Male sheet_5
       rect:
         serializedVersion: 2
         x: 32
@@ -236,14 +236,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d25a21924735b1549bd0e2ed91cf77d
-      internalID: -1443865841
+      spriteID: 8d7296c813e1367c88f34228cc2d2d88
+      internalID: 1518601557
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_6
+      name: Male sheet_6
       rect:
         serializedVersion: 2
         x: 64
@@ -257,14 +257,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 455900411bfb7fce087ed28013cb7712
-      internalID: -1927085300
+      spriteID: 9e3704d46ee7d02909dc07130cd3a2f2
+      internalID: -1917176549
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_7
+      name: Male sheet_7
       rect:
         serializedVersion: 2
         x: 96
@@ -278,14 +278,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e772dc131cc169064b6e0e70d444aeb9
-      internalID: -421050162
+      spriteID: 7fcdbb1686468b892a6231f2dbad9a15
+      internalID: 218919388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_8
+      name: Male sheet_8
       rect:
         serializedVersion: 2
         x: 0
@@ -299,14 +299,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9967443c42a04e31aab91331dad703ad
-      internalID: 452137270
+      spriteID: b18ea4eee9a4a85bbbc4a130752097c1
+      internalID: 207199145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_9
+      name: Male sheet_9
       rect:
         serializedVersion: 2
         x: 32
@@ -320,14 +320,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc8202a3680b6a9039695d691bc415fc
-      internalID: 2121409724
+      spriteID: 3fb3ac5ae6b43f24f98ad53999b62e74
+      internalID: 1834073259
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_10
+      name: Male sheet_10
       rect:
         serializedVersion: 2
         x: 64
@@ -341,14 +341,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdb7c04f857c218c783bb42fbbd5a37b
-      internalID: -901804845
+      spriteID: 535d303b000537b61a0101519bf0af14
+      internalID: 705632021
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_11
+      name: Male sheet_11
       rect:
         serializedVersion: 2
         x: 96
@@ -362,14 +362,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00a1f702051390e7d926171dd8a23c4b
-      internalID: 709586212
+      spriteID: ec0ddfce10e6ffd1784ebf886e5bde91
+      internalID: -703092102
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_12
+      name: Male sheet_12
       rect:
         serializedVersion: 2
         x: 0
@@ -383,14 +383,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0984bc6876b00b5f825f3107e7850ca
-      internalID: -14745385
+      spriteID: 5bd649b10a78dfdf48b957aa969434ed
+      internalID: -1480290580
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_13
+      name: Male sheet_13
       rect:
         serializedVersion: 2
         x: 32
@@ -404,14 +404,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99f913461165cda3fa4d881c60942314
-      internalID: 1735842153
+      spriteID: 1de6206663523d773bf3a71747836b5b
+      internalID: -1111812840
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_14
+      name: Male sheet_14
       rect:
         serializedVersion: 2
         x: 64
@@ -425,14 +425,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eebd719a30c73a174b5ff06fa48e6a52
-      internalID: 750183979
+      spriteID: 5fcb7b0c04bc3ae208ae08e8c3611fa8
+      internalID: 1061366373
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Male_Character_Sheet_Walking_15
+      name: Male sheet_15
       rect:
         serializedVersion: 2
         x: 96
@@ -446,8 +446,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbf8972339ea05858b05971d5e61f83c
-      internalID: 1881113105
+      spriteID: 3834cd7f3ff6517cbbd4c4e48f2fe0c4
+      internalID: 235229707
       vertices: []
       indices: 
       edges: []
@@ -463,22 +463,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Male_Character_Sheet_Walking_12: -14745385
-      Male_Character_Sheet_Walking_5: -1443865841
-      Male_Character_Sheet_Walking_8: 452137270
-      Male_Character_Sheet_Walking_3: -1809662164
-      Male_Character_Sheet_Walking_10: -901804845
-      Male_Character_Sheet_Walking_2: 1463279718
-      Male_Character_Sheet_Walking_15: 1881113105
-      Male_Character_Sheet_Walking_9: 2121409724
-      Male_Character_Sheet_Walking_14: 750183979
-      Male_Character_Sheet_Walking_13: 1735842153
-      Male_Character_Sheet_Walking_1: 588480259
-      Male_Character_Sheet_Walking_0: -1262967205
-      Male_Character_Sheet_Walking_7: -421050162
-      Male_Character_Sheet_Walking_11: 709586212
-      Male_Character_Sheet_Walking_6: -1927085300
-      Male_Character_Sheet_Walking_4: -941494537
+      Male sheet_15: 235229707
+      Male sheet_11: -703092102
+      Male sheet_7: 218919388
+      Male sheet_14: 1061366373
+      Male sheet_12: -1480290580
+      Male sheet_8: 207199145
+      Male sheet_2: -1209611752
+      Male sheet_3: 922484701
+      Male sheet_0: -2080373593
+      Male sheet_9: 1834073259
+      Male sheet_6: -1917176549
+      Male sheet_5: 1518601557
+      Male sheet_4: -1728849623
+      Male sheet_13: -1111812840
+      Male sheet_10: 705632021
+      Male sheet_1: -1673540394
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

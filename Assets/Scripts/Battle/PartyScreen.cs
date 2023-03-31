@@ -35,6 +35,7 @@ public class PartyScreen : MonoBehaviour
             }
          }
     }
+    
     public void setMessageText(string message){
         messageText.text = message;
     }

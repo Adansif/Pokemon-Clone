@@ -12,6 +12,7 @@ public class ConditionsDB
             condition.Id = conditionId;
         }
     }
+    
    public static Dictionary<ConditionID, Conditions> Conditions {get; set;} = new Dictionary<ConditionID, Conditions>()
     {
         {

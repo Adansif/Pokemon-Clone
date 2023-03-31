@@ -41,7 +41,6 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.TypeDialog($"A wild {enemyPokemon.Pokemon.Base.Name} had appear.") ;
         
-
         actionSelection();
     }
 
@@ -56,6 +55,7 @@ public class BattleSystem : MonoBehaviour
         dialogBox.SetDialog("Choose an option");
         dialogBox.enableOptionSelector(true);
     }
+
     void openPartyScreen(){
         state = battleState.partyScreen;
         partyScreen.setPartyData(playerParty.Pokemons);
@@ -80,6 +80,7 @@ public class BattleSystem : MonoBehaviour
             battleOver(true);
         }
     }
+
     public void HandleUpdate(){
         if (state == battleState.actionSelection){
             resolveActionSelector();
@@ -138,6 +139,7 @@ public class BattleSystem : MonoBehaviour
                 currentInput = 0;
         }
     }
+
     void resolvePartyScreenSelector(){
         
         currentMember = InputSelector(playerParty.Pokemons.Count -1);
@@ -170,9 +172,10 @@ public class BattleSystem : MonoBehaviour
         } else if(Input.GetKeyDown(KeyCode.X)){
             partyScreen.gameObject.SetActive(false);
             actionSelection();
-            currentInput = 0; //Importante mantener los currenntImput =  0  ya que si no, al darle a la x para salir de la opcion, los current% cogeral el valor final de Imput y podrian salirse de los limites
+            currentInput = 0; //Importante mantener los currenntImput =  0 
         }
     }
+
     private int  InputSelector( int input){ // Esta funcion es la que permite seleccionar los elementos en batalla. No tocar, funciona porque Don Bosco asi lo quiere
          if (Input.GetKeyDown(KeyCode.S) && currentInput < (input-1)){
             currentInput += 2;
@@ -186,98 +189,99 @@ public class BattleSystem : MonoBehaviour
         return currentInput;
     }
     
-bool checkIfMoveHits(Move move, Pokemon sourcePokemon, Pokemon targetPokemon){
-    
-    if(move._base.AlwaysHit){
-        return true;
-    }
-    
-    float moveAccuracy = move._base.Accuracy;
+    bool checkIfMoveHits(Move move, Pokemon sourcePokemon, Pokemon targetPokemon){
+        
+        if(move._base.AlwaysHit){
+            return true;
+        }
+        
+        float moveAccuracy = move._base.Accuracy;
 
-    int accuracy = sourcePokemon.StatBoost[Stat.Accuracy];
-    int evasion = targetPokemon.StatBoost[Stat.Evasion];
+        int accuracy = sourcePokemon.StatBoost[Stat.Accuracy];
+        int evasion = targetPokemon.StatBoost[Stat.Evasion];
 
-    var boostValues = new float[] {1f, 4f/3f, 5f/3f, 2f, 7f/3f, 8f/3f, 3f};
+        var boostValues = new float[] {1f, 4f/3f, 5f/3f, 2f, 7f/3f, 8f/3f, 3f};
 
-    if (accuracy > 0){
-        moveAccuracy *= boostValues[accuracy];
-    }else{
-        moveAccuracy /= boostValues[-accuracy];
-    }
-
-    if (evasion > 0){
-        moveAccuracy /= boostValues[evasion];
-    }else{
-        moveAccuracy *= boostValues[-evasion];
-    }
-
-    if (UnityEngine.Random.Range(1, 101) <= moveAccuracy){
-        return true;
-    }else {
-        return false;
-    }
-}
-IEnumerator RunTurns(BattleAction playerAction){
-    state = battleState.RunningTurn;
-
-    if (playerAction == BattleAction.Move){
-        playerPokemon.Pokemon.CurrentMove = playerPokemon.Pokemon.Moves[currentMove];
-        enemyPokemon.Pokemon.CurrentMove = enemyPokemon.Pokemon.getRandomMove();
-
-        int playerMovePriority = playerPokemon.Pokemon.CurrentMove._base.Priority;
-        int enemyMovePriority = enemyPokemon.Pokemon.CurrentMove._base.Priority;
-
-        //Check wich pokemon goes first
-        bool playerGoesFirst = true;
-        if (enemyMovePriority > playerMovePriority){
-            playerGoesFirst = false;
-        }else if(enemyMovePriority == playerMovePriority){
-            playerGoesFirst = playerPokemon.Pokemon.Speed >= enemyPokemon.Pokemon.Speed;
+        if (accuracy > 0){
+            moveAccuracy *= boostValues[accuracy];
+        }else{
+            moveAccuracy /= boostValues[-accuracy];
         }
 
+        if (evasion > 0){
+            moveAccuracy /= boostValues[evasion];
+        }else{
+            moveAccuracy *= boostValues[-evasion];
+        }
 
-        var firstPokemon = (playerGoesFirst)? playerPokemon : enemyPokemon;
-        var secondPokemon = (playerGoesFirst)? enemyPokemon : playerPokemon;
+        if (UnityEngine.Random.Range(1, 101) <= moveAccuracy){
+            return true;
+        }else {
+            return false;
+        }
+    }
 
-        var secondUnit = secondPokemon.Pokemon;
+    IEnumerator RunTurns(BattleAction playerAction){
+        state = battleState.RunningTurn;
 
-        // First turn
-        yield return RunMove(firstPokemon, secondPokemon, firstPokemon.Pokemon.CurrentMove);
-        yield return RunAfterTurn(firstPokemon);
-        if (state == battleState.battleOver){
-            yield break;
-        } 
+        if (playerAction == BattleAction.Move){
+            playerPokemon.Pokemon.CurrentMove = playerPokemon.Pokemon.Moves[currentMove];
+            enemyPokemon.Pokemon.CurrentMove = enemyPokemon.Pokemon.getRandomMove();
 
-        if (secondUnit.HP > 0){
-            // Second turn
-            yield return RunMove(secondPokemon, firstPokemon, secondPokemon.Pokemon.CurrentMove);
-            yield return RunAfterTurn(secondPokemon);
+            int playerMovePriority = playerPokemon.Pokemon.CurrentMove._base.Priority;
+            int enemyMovePriority = enemyPokemon.Pokemon.CurrentMove._base.Priority;
+
+            //Check wich pokemon goes first
+            bool playerGoesFirst = true;
+            if (enemyMovePriority > playerMovePriority){
+                playerGoesFirst = false;
+            }else if(enemyMovePriority == playerMovePriority){
+                playerGoesFirst = playerPokemon.Pokemon.Speed >= enemyPokemon.Pokemon.Speed;
+            }
+
+
+            var firstPokemon = (playerGoesFirst)? playerPokemon : enemyPokemon;
+            var secondPokemon = (playerGoesFirst)? enemyPokemon : playerPokemon;
+
+            var secondUnit = secondPokemon.Pokemon;
+
+            // First turn
+            yield return RunMove(firstPokemon, secondPokemon, firstPokemon.Pokemon.CurrentMove);
+            yield return RunAfterTurn(firstPokemon);
+            if (state == battleState.battleOver){
+                yield break;
+            } 
+
+            if (secondUnit.HP > 0){
+                // Second turn
+                yield return RunMove(secondPokemon, firstPokemon, secondPokemon.Pokemon.CurrentMove);
+                yield return RunAfterTurn(secondPokemon);
+
+                if (state == battleState.battleOver){
+                    yield break;
+                } 
+            } 
+        }else{
+            if(playerAction == BattleAction.SwitchPokemon){
+                var selectedMember = playerParty.Pokemons[currentMember];
+                state = battleState.busy;
+                yield return switchPokemon(selectedMember);
+            }
+            // Enemy will have the turn if  player switches pokemon
+
+            var enemyMove = enemyPokemon.Pokemon.getRandomMove();
+            yield return RunMove(enemyPokemon, playerPokemon, enemyMove);
+            yield return RunAfterTurn(enemyPokemon);
 
             if (state == battleState.battleOver){
                 yield break;
             } 
-        } 
-    }else{
-        if(playerAction == BattleAction.SwitchPokemon){
-            var selectedMember = playerParty.Pokemons[currentMember];
-            state = battleState.busy;
-            yield return switchPokemon(selectedMember);
         }
-        // Enemy will have the turn if  player switches pokemon
 
-        var enemyMove = enemyPokemon.Pokemon.getRandomMove();
-        yield return RunMove(enemyPokemon, playerPokemon, enemyMove);
-        yield return RunAfterTurn(enemyPokemon);
-
-        if (state == battleState.battleOver){
-            yield break;
-        } 
+        if (state != battleState.battleOver){
+            actionSelection();
+        }
     }
-
-    if (state != battleState.battleOver){
-        actionSelection();
-    }
-}
     
     IEnumerator RunMoveEffects(MoveEffects effects, Pokemon source, Pokemon target, MoveTarget moveTarget){
        
@@ -360,6 +364,7 @@ IEnumerator RunTurns(BattleAction playerAction){
         }
 
     }
+    
     IEnumerator RunAfterTurn(PokemonUnit sourceUnit){
 
         if (state == battleState.battleOver){

@@ -21,12 +21,10 @@ public class PartyMemberUI : MonoBehaviour
     Vector3 originalPosition;
 
     private void Awake(){
-        
     }
     public void Start(){
         icon.sprite = _pokemon.Base.Icon;
         originalPosition = icon.transform.localPosition;
-        
     }
 
     public void SetData(Pokemon pokemon){
@@ -42,6 +40,7 @@ public class PartyMemberUI : MonoBehaviour
     public IEnumerator updateHP(){
         yield return HPBar.setHPSmooth((float)  _pokemon.HP / _pokemon.MaxHP);
     }
+    
     public void IsSelected(bool isSelected){
         imagen = GetComponent<Image>();
         if (isSelected){
