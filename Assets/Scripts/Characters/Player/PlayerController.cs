@@ -12,11 +12,12 @@ public class PlayerController : MonoBehaviour
     private bool isMoving;
     private bool isAbleToRun = true;
 
-    public LayerMask CollisionObjectsLayer;
+    public LayerMask collisionObjectsLayer;
+    public LayerMask interactableLayer;
     public LayerMask grassLayer;
     public event Action OnEncountered;
     private  Vector2 input;
-    private Animator animator;
+    private CharacterAnimator animator;
 
     public PlayerController(){
 
@@ -24,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
 //Awake() nos permite llamar al animator para poder sacar las animaciones
     private void Awake(){
-        animator = GetComponent<Animator>();
+        animator = GetComponent<CharacterAnimator>();
     }
 
 
@@ -58,8 +59,8 @@ public class PlayerController : MonoBehaviour
 
         if (input != Vector2.zero)
         {
-            animator.SetFloat("moveX", input.x);
-            animator.SetFloat("moveY", input.y);
+            animator.MoveX = input.x;
+            animator.MoveY = input.y;
 
             var targetPosition = transform.position;
             targetPosition.x += input.x;
@@ -71,7 +72,24 @@ public class PlayerController : MonoBehaviour
     }
 
     // Aquí finaliza el movimiento
-    animator.SetBool("isMoving", isMoving);
+    animator.IsMoving = isMoving;
+
+    if(Input.GetKeyDown(KeyCode.Z)){
+        Interact();
+    }
+}
+
+void Interact(){
+    var facingDir= new Vector3(animator.MoveX, animator.MoveY);
+    var interactPos = transform.position + facingDir;
+
+    Debug.DrawLine(transform.position, interactPos, Color.blue, 0.5f);
+
+    var collider = Physics2D.OverlapCircle(interactPos, 0.3f, interactableLayer);
+
+    if (collider != null){
+        collider.GetComponent<Interactable>()?.Interact();
+    }
 }
 
     IEnumerator Move(Vector3 targetPosition){
@@ -95,7 +113,7 @@ public class PlayerController : MonoBehaviour
     }
     //Nos va a permitir saber si el objeto que tenemos enfrente va a collisionar con nosotros
     private bool isAbleToWalk(Vector2 targetPosition){
-        if (Physics2D.OverlapCircle(targetPosition, 0.2f, CollisionObjectsLayer) != null){
+        if (Physics2D.OverlapCircle(targetPosition, 0.2f, collisionObjectsLayer | interactableLayer) != null){
             return false;
         }
         return true;
@@ -104,7 +122,7 @@ public class PlayerController : MonoBehaviour
     private void chechIfEncounter(){
         if (inGrass()){
             if (UnityEngine.Random.Range(1,101) <= 10){ //Colocamos UnityEngine delante de Random para que se diferencie del random de Using.
-                animator.SetBool("isMoving", false); //Esto desactiva la animacion de caminar cuando estemos en batalla.
+                animator.IsMoving = false; //Esto desactiva la animacion de caminar cuando estemos en batalla.
                 OnEncountered();
             }
         }
