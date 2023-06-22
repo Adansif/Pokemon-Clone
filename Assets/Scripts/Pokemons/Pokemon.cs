@@ -36,7 +36,7 @@ public class Pokemon
     public Queue<string> StatusChanges{get; private set;} = new Queue<string>();
     //Se usa para almacenar una lista de elementos pero puedes sacar elementos de ella
 
-    public void init(){
+    public void Init(){
         
         // Generate Moves based on level
         Moves = new List<Move>();
@@ -80,7 +80,7 @@ public class Pokemon
         MaxHP = Mathf.FloorToInt(((2 * Base.MaxHP)+ Base.HPIV + (Base.HPEV/4) * Level)/100f) + 10 + Level;
     }
 
-    int getStat(Stat stat){
+    int GetStat(Stat stat){
         int statVal = Stats[stat];
 
         // Stat boost
@@ -113,26 +113,26 @@ public class Pokemon
     }
 
     public int Attack{
-        get {return getStat(Stat.Attack);}
+        get {return GetStat(Stat.Attack);}
     }
     public int Defense{
-        get {return getStat(Stat.Defense);}
+        get {return GetStat(Stat.Defense);}
     }
     public int SpAttack{
-        get {return getStat(Stat.SpAttack);}
+        get {return GetStat(Stat.SpAttack);}
     }
     public int SpDefense{
-        get {return getStat(Stat.SpDefense);}
+        get {return GetStat(Stat.SpDefense);}
     }
     public int Speed{
-        get {return getStat(Stat.Speed);}
+        get {return GetStat(Stat.Speed);}
     }
     public bool IsShiny(){
         return this.isShiny;
     }
     public int MaxHP{ get; private set; }
 
-    public DamageDetails isTakingDamage(Move move, Pokemon attacker){
+    public DamageDetails IsTakingDamage(Move move, Pokemon attacker){
         float critical = 1f;
         if (Random.value * 100f <= 6.25f){
             critical = 2f;
@@ -192,7 +192,7 @@ public class Pokemon
         VolatileStatus = null;
     }
 
-    public Move getRandomMove(){
+    public Move GetRandomMove(){
 
         var movesWithPP = Moves.Where(x =>x.PP > 0).ToList();
 

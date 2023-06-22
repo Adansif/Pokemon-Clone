@@ -11,7 +11,7 @@ public class GrassAnimation : MonoBehaviour
     Debug.Log("Object position: " + transform.position);
 }
 
-    public IEnumerator setAnimation(){
+    public IEnumerator SetAnimation(){
         if (player.transform.position == gameObject.transform.position){
             Debug.Log("Player detected at position: " + player.transform.position);
             gameObject.SetActive(true);

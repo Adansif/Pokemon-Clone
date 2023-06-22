@@ -93,7 +93,7 @@ void Interact(){
 }
 
     IEnumerator Move(Vector3 targetPosition){
-        coverPlant.removeLayer();
+        coverPlant.RemoveLayer();
         isMoving = true;      
 
         while ((targetPosition -transform.position).sqrMagnitude > Mathf.Epsilon){
@@ -103,13 +103,13 @@ void Interact(){
         transform.position = targetPosition;
 
         foreach (var plantAnimation in plantAnimations) {
-            StartCoroutine(plantAnimation.setAnimation());     
+            StartCoroutine(plantAnimation.SetAnimation());     
         }
         
-        coverPlant.setLayer();
+        coverPlant.SetLayer();
         isMoving = false;
         
-        chechIfEncounter();
+        ChechIfEncounter();
     }
     //Nos va a permitir saber si el objeto que tenemos enfrente va a collisionar con nosotros
     private bool isAbleToWalk(Vector2 targetPosition){
@@ -119,8 +119,8 @@ void Interact(){
         return true;
     }
     
-    private void chechIfEncounter(){
-        if (inGrass()){
+    private void ChechIfEncounter(){
+        if (IsInGrass()){
             if (UnityEngine.Random.Range(1,101) <= 10){ //Colocamos UnityEngine delante de Random para que se diferencie del random de Using.
                 animator.IsMoving = false; //Esto desactiva la animacion de caminar cuando estemos en batalla.
                 OnEncountered();
@@ -129,7 +129,7 @@ void Interact(){
     }
 
     // Este metodo es para ser llamado por coverPlant, GrassAnimation y ckeckIfEncounte(refactorizado)
-    public bool inGrass(){
+    public bool IsInGrass(){
         if (Physics2D.OverlapCircle(transform.position, 0.2f, grassLayer) != null){
             return true;
         } else{

@@ -18,8 +18,8 @@ public class GameController : MonoBehaviour
     }
 
     private void Start(){
-        playerController.OnEncountered += startBattle;
-        battleSystem.OnBattleOver += endBattle;
+        playerController.OnEncountered += StartBattle;
+        battleSystem.OnBattleOver += EndBattle;
 
         DialogManager.Instance.OnShowDialog += () => {
             state = GameState.dialog;
@@ -30,17 +30,17 @@ public class GameController : MonoBehaviour
            }
         };
     }
-    void startBattle(){
+    void StartBattle(){
         state = GameState.battle;
         battleSystem.gameObject.SetActive(true);
         playerCamera.gameObject.SetActive(false);
 
         var playerParty = playerController.GetComponent<PokemonParty>();
-        var wildPokemon = FindObjectOfType<MapArea>().GetComponent<MapArea>().getRandomWildPokemon();
+        var wildPokemon = FindObjectOfType<MapArea>().GetComponent<MapArea>().GetRandomWildPokemon();
         battleSystem.startBattle(playerParty, wildPokemon);
     }
 
-    void endBattle(bool isWon){
+    void EndBattle(bool isWon){
         state = GameState.freeRoam;
         battleSystem.gameObject.SetActive(false);
         playerCamera.gameObject.SetActive(true);

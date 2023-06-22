@@ -49,12 +49,12 @@ public class PokemonUnit : MonoBehaviour
     HUD.SetData(pokemon);
 
     image.color = originalColor;
-    playerEnterAnimation();
+    PlayerEnterAnimation();
   }
 
 
 // Utilizamos esta funcion en lugar de un Animator para hacer que los pokemon se deslicen para entrar al combate
-  public void playerEnterAnimation(){
+  public void PlayerEnterAnimation(){
     if (isPlayerPokemon){
       image.transform.localPosition = new Vector3(-500f, originalPosition.y);
     } else{
@@ -63,7 +63,7 @@ public class PokemonUnit : MonoBehaviour
     image.transform.DOLocalMoveX(originalPosition.x, 2f);
   }
 
-  public void playAttackAnimation(){
+  public void PlayAttackAnimation(){
     var sequence = DOTween.Sequence();
     if (isPlayerPokemon){
       sequence.Append(image.transform.DOLocalMoveX(originalPosition.x + 50F, 0.2f));
@@ -73,13 +73,13 @@ public class PokemonUnit : MonoBehaviour
     sequence.Append(image.transform.DOLocalMoveX(originalPosition.x, 0.2f));
   }
 
-  public void playHitAnimation(){
+  public void PlayHitAnimation(){
     var sequence = DOTween.Sequence();
     sequence.Append(image.DOColor(Color.gray, 0.1f));
     sequence.Append(image.DOColor(originalColor, 0.1f));
   }
 
-  public void playFaintAnimation(){
+  public void PlayFaintAnimation(){
     var sequence = DOTween.Sequence();
     sequence.Append(image.transform.DOLocalMoveY(originalPosition.y - 150f, 0.5f));
     sequence.Join(image.DOFade(0f, 0.5f));

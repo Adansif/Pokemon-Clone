@@ -13,7 +13,7 @@ public class HPBar : MonoBehaviour
     }
 
 // Reduce la barra de vida de manera gradual
-    public IEnumerator setHPSmooth(float newHP){
+    public IEnumerator SetHPSmooth(float newHP){
         float currentHP = health.transform.localScale.x;
         float changeAmt = currentHP - newHP;
 

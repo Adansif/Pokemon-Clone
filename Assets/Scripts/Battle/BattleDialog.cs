@@ -32,20 +32,20 @@ public class BattleDialog : MonoBehaviour
         yield return new WaitForSeconds(1f);
     }
 
-    public void enableDialogText (bool isEnabled){
+    public void EnableDialogText (bool isEnabled){
         dialogText.enabled = isEnabled;
     }
     
-    public void enableOptionSelector (bool isEnabled){
+    public void EnableOptionSelector (bool isEnabled){
         optionSelector.SetActive(isEnabled);
     }
 
-    public void enableMoveSelector (bool isEnabled){
+    public void EnableMoveSelector (bool isEnabled){
         moveSelector.SetActive(isEnabled);
         moveDetails.SetActive(isEnabled);
     }
 
-    public void updateActionSelection(int selectedAction){
+    public void UpdateActionSelection(int selectedAction){
         for (int i=0; i<actionTexts.Count; i++){
             if (i == selectedAction){
                 actionTexts[i].color = highlightedColor;
@@ -55,7 +55,7 @@ public class BattleDialog : MonoBehaviour
         }
     }
 
-    public void updateMoveSelection(int selectedMove, Move move){
+    public void UpdateMoveSelection(int selectedMove, Move move){
         for (int i=0; i<moveTexts.Count; i++){
             if (i == selectedMove){
                 moveTexts[i].color = highlightedColor;
@@ -76,7 +76,7 @@ public class BattleDialog : MonoBehaviour
         }
     }
     
-    public void setMoveNames(List<Move> moves){
+    public void SetMoveNames(List<Move> moves){
         for (int i=0; i<moveTexts.Count; ++i){
             if (i < moves.Count){
                 moveTexts[i].text = moves[i]._base.Name;
