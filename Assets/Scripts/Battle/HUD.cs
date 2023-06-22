@@ -28,7 +28,7 @@ public class HUD : MonoBehaviour
         HPBar.SetHP((float)  pokemon.HP / pokemon.MaxHP);
 
         SetStatusImage();
-        setBarColor(_pokemon);
+        SetBarColor(_pokemon);
         _pokemon.OnStatusChanged += SetStatusImage;
     }
 
@@ -55,7 +55,7 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public void setBarColor(Pokemon pokemon){
+    public void SetBarColor(Pokemon pokemon){
         if(pokemon.HP <= pokemon.MaxHP/4){
             HPBarColor.sprite = healthSprite[2];
         }else if(pokemon.HP <= pokemon.MaxHP/2){
@@ -65,14 +65,14 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public void updateHPText(Pokemon pokemon){
+    public void UpdateHPText(Pokemon pokemon){
         maxHPText.text =pokemon.MaxHP.ToString();
         currentHPText.text = pokemon.HP.ToString();
     }
 
-    public IEnumerator updateHP(){
+    public IEnumerator UpdateHP(){
         if (_pokemon.HpChanged){
-            yield return HPBar.setHPSmooth((float)  _pokemon.HP / _pokemon.MaxHP);
+            yield return HPBar.SetHPSmooth((float)  _pokemon.HP / _pokemon.MaxHP);
             _pokemon.HpChanged = false;
         }
     }

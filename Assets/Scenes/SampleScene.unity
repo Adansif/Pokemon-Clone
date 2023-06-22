@@ -9384,7 +9384,7 @@ Tilemap:
       - {fileID: 1521842033, guid: e157b32ff7c9b033eb4a4236f85c3d92, type: 3}
       - {fileID: -513097078, guid: e26d960083a5eef6fa209a9282541ee9, type: 3}
       - {fileID: -1692199478, guid: c782770d0d7955dcfac4c8ca39490d83, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 3, y: 6, z: 0}
@@ -10039,7 +10039,7 @@ GameObject:
   - component: {fileID: 237479961}
   - component: {fileID: 237479960}
   m_Layer: 0
-  m_Name: Huir
+  m_Name: Run
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10098,7 +10098,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Huir
+  m_Text: Run
 --- !u!222 &237479961
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18800,7 +18800,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Bolsa
+  m_Text: Bag
 --- !u!222 &1513075465
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19584,7 +19584,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Combatir
+  m_Text: Fight
 --- !u!222 &1564226691
 CanvasRenderer:
   m_ObjectHideFlags: 0

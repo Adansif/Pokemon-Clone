@@ -38,7 +38,7 @@ public class PartyMemberUI : MonoBehaviour
     }
 
     public IEnumerator updateHP(){
-        yield return HPBar.setHPSmooth((float)  _pokemon.HP / _pokemon.MaxHP);
+        yield return HPBar.SetHPSmooth((float)  _pokemon.HP / _pokemon.MaxHP);
     }
     
     public void IsSelected(bool isSelected){

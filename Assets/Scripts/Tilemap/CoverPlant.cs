@@ -13,16 +13,16 @@ public class CoverPlant : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    public void setLayer() {
+    public void SetLayer() {
        
-        if (player.inGrass()){
+        if (player.IsInGrass()){
             transform.position = player.transform.position;
             sprite.sortingOrder = 10;
             gameObject.SetActive(true);
         }                      
     }
 
-    public void removeLayer(){
+    public void RemoveLayer(){
         gameObject.SetActive(false);
     }
 }
