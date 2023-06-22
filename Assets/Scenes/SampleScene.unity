@@ -9384,7 +9384,7 @@ Tilemap:
       - {fileID: 1521842033, guid: e157b32ff7c9b033eb4a4236f85c3d92, type: 3}
       - {fileID: -513097078, guid: e26d960083a5eef6fa209a9282541ee9, type: 3}
       - {fileID: -1692199478, guid: c782770d0d7955dcfac4c8ca39490d83, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 3, y: 6, z: 0}
@@ -11441,7 +11441,7 @@ Tilemap:
       - {fileID: -399438004, guid: e157b32ff7c9b033eb4a4236f85c3d92, type: 3}
       - {fileID: 558801486, guid: e26d960083a5eef6fa209a9282541ee9, type: 3}
       - {fileID: -814467590, guid: c782770d0d7955dcfac4c8ca39490d83, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 2, y: 8, z: 0}
@@ -23421,8 +23421,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
     lines:
-    - Hi! looks like you are making a Pokemon game
-    - Good luck son
+    - Testing 1
+    - Testing 2
+    - Testing 3
 --- !u!1 &1779938052
 GameObject:
   m_ObjectHideFlags: 0
